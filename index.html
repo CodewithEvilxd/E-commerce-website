@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evilxd E-commerce Website</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e8eaf6;
+        }
+
+        header {
+            background-color: #673ab7;
+            color: #fff;
+            padding: 1#42445Aem;
+            text-align: center;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px;
+            text-align: center;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: #9c27b0;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #7b1fa2;
+        }
+
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 1;
+            color: #9c27b0;
+        }
+
+        #cart {
+            display: none;
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        #delivery-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            /* Add blur effect */
+            justify-content: center;
+            align-items: center;
+        }
+
+        #delivery-form {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .remove-btn,
+        .update-btn {
+            background-color: #e91e63;
+            color: #fff;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .remove-btn:hover,
+        .update-btn:hover {
+            background-color: #c2185b;
+        }
+
+        #order-btn {
+            background-color: #3f51b5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #order-btn:hover {
+            background-color: #303f9f;
+        }
+
+        #clear-cart-btn {
+            background-color: #ff5722;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #clear-cart-btn:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>E-commerce</h1>
+    </header>
+
+    <div class="product" id="product1">
+        <img src="https://images.unsplash.com/photo-1695048133021-be2def43f3b2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Product 1 Image">
+        <h2>Iphone 15</h2>
+        <p>Price: ₹199999</p>
+        <button onclick="addToCart('Product 1', 20,990)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product2">
+        <img src="2.png" alt="Product 2 Image">
+        <h2>Google Pixel 7a</h2>
+        <p>Price: ₹39,999</p>
+        <button onclick="addToCart('Product 2', 39,999)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product3">
+        <img src="https://rukminim2.flixcart.com/image/832/832/xif0q/watch/z/p/c/-original-imagpzjfgmbpmscn.jpeg?q=70">
+        <h2>Briggs Analog Watch</h2>
+        <p>Price: ₹4,997</p>
+        <button onclick="addToCart('Product 3', 4,997)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product4">
+        <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/computer/d/d/w/-original-imagwy8e5kagmeaa.jpeg?q=70"
+            alt="Product 4 Image">
+        <h2>HP Intel Intel Core i3</h2>
+        <p>Price: ₹37,990</p>
+        <button onclick="addToCart('Product 4', 37,990)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product5">
+        <img src="https://rukminim2.flixcart.com/image/416/416/gamepad/usb/b/4/g/red-gear-pro-series-wired-original-imaehzcnvagsexvk.jpeg?q=70"
+            alt="Product 5 Image">
+        <h2>Redgear Pro Series</h2>
+        <p>Price: ₹1,099</p>
+        <button onclick="addToCart('Product 5', 1,999)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product6">
+        <img src="https://images.unsplash.com/photo-1662408018125-d6322cfdc23b?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Product 6 Image">
+        <h2>Machnical Keyboard</h2>
+        <p>Price: ₹1999</p>
+        <button onclick="addToCart('Product 6', 394)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product7">
+        <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/television/n/b/f/65ca-vu-original-imaguf4xxzmtfegg.jpeg?q=70"
+            alt="Product 7 Image">
+        <h2>Vu 164 cm</h2>
+        <p>Price: ₹44,999</p>
+        <button onclick="addToCart('Product 7', 44,999)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product7">
+        <img src="https://images.unsplash.com/photo-1607677686474-ad91fc94f5ae?q=80&w=1960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3 " width="300px"
+            alt="Product 7 Image">
+        <h2>Mouse</h2>
+        <p>Price: ₹999</p>
+        <button onclick="addToCart('Product 7', 44,999)">Add to Cart</button>
+    </div>
+
+    <div class="product" id="product7">
+        <img src="https://images.unsplash.com/photo-1591105866700-cb5d708ccd93?q=80&w=1814&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Product 7 Image">
+        <h2>Headphone</h2>
+        <p>Price: ₹999</p>
+        <button onclick="addToCart('Product 7', 44,999)">Add to Cart</button>
+    </div>
+
+
+    <div class="cart-icon" onclick="toggleCart()">🛒</div>
+
+    <div id="cart">
+        <h2>Your Cart</h2>
+        <ul id="cart-items"></ul>
+        <p>Total: ₹<span id="total">0.00</span></p>
+        <button id="order-btn" onclick="placeOrder()">Order</button>
+        <button id="clear-cart-btn" onclick="clearCart()">Clear Cart</button>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(productName, price) {
+            const totalPrice = price;
+
+            const existingItemIndex = cart.findIndex(item => item.name === productName);
+
+            if (existingItemIndex !== -1) {
+                cart[existingItemIndex].quantity += 1;
+                cart[existingItemIndex].total += totalPrice;
+            } else {
+                cart.push({
+                    name: productName,
+                    price: price,
+                    quantity: 1,
+                    total: totalPrice
+                });
+            }
+
+            total += totalPrice;
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total');
+
+            cartItems.innerHTML = '';
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'cart-item';
+                li.innerHTML = `
+                    <span>${item.name} x${item.quantity}</span>
+                    <span>$${item.total.toFixed(2)}</span>
+                    <button class="remove-btn" onclick="removeCartItem('${item.name}')">Remove</button>
+                    <button class="update-btn" onclick="updateCartItem('${item.name}')">Update</button>
+                `;
+                cartItems.appendChild(li);
+            });
+
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        function toggleCart() {
+            const cartDiv = document.getElementById('cart');
+            cartDiv.style.display = cartDiv.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleDeliveryModal() {
+            const deliveryModal = document.getElementById('delivery-modal');
+            deliveryModal.style.display = deliveryModal.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function removeCartItem(productName) {
+            const itemIndex = cart.findIndex(item => item.name === productName);
+
+            if (itemIndex !== -1) {
+                total -= cart[itemIndex].total;
+                cart.splice(itemIndex, 1);
+                updateCart();
+            }
+        }
+
+        function updateCartItem(productName) {
+            const itemIndex = cart.findIndex(item => item.name === productName);
+
+            if (itemIndex !== -1) {
+                const newQuantity = prompt(`Update quantity for ${productName}:`, cart[itemIndex].quantity);
+                if (newQuantity !== null && !isNaN(newQuantity) && newQuantity > 0) {
+                    const newTotal = cart[itemIndex].price * newQuantity;
+                    total += newTotal - cart[itemIndex].total;
+                    cart[itemIndex].quantity = parseInt(newQuantity, 10);
+                    cart[itemIndex].total = newTotal;
+                    updateCart();
+                } else {
+                    alert('Invalid quantity. Please enter a valid number greater than 0.');
+                }
+            }
+        }
+
+        function placeOrder() {
+            // Assuming INDEX2.HTML is in the same directory, adjust the path accordingly if needed
+            window.location.href = 'INDEX2.HTML';
+        }
+    </script>
+
+</body>
+
+</html>
